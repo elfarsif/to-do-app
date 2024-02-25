@@ -23,12 +23,15 @@ Follow these steps to install and run the application locally:
 
 1. **Clone the repository:**
 ```
-git clone https://github.com/your-username/your-repository.git
-cd your-repository
+git clone https://github.com/elfarsif/to-do-app.git
+cd api
 ```
 
 2. **Install dependencies:**
 ```
+cd api
+npm install
+cd ../ui
 npm install
 ```
 3. **Set up MongoDB:**
@@ -46,11 +49,14 @@ npm install
 5. **Run the application:**
 
 ```
-npm start
+cd api
+node server.js
+cd ../ui
+ng serve
 ```
 
 6. **Access the application:**
-Open your browser and navigate to `http://localhost:3000` (or the specified port if you changed it).
+Open your browser and navigate to `http://localhost:4200` (or the specified port if you changed it).
 
 ## Contributing
 
