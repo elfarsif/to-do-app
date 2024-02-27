@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,10 @@ import { UserService } from '../_services/user.service';
 })
 export class HomeComponent implements OnInit {
   content?: string;
+  todoForm = new FormGroup({
+    todo: new FormControl(''),
+  });
+  todoList: any = [];
 
   constructor(private userService: UserService) {}
 
@@ -25,5 +30,27 @@ export class HomeComponent implements OnInit {
         }
       },
     });
+  }
+
+  addToDoItem() {
+    this.todoList = [
+      ...this.todoList,
+      {
+        id: this.todoList.length,
+        todo: this.todoForm.value.todo,
+        isCompleted: false,
+      },
+    ];
+    this.todoForm.patchValue({
+      todo: '',
+    });
+    console.log(this.todoList);
+  }
+
+  removeItem(task: any) {
+    console.log('remove by id ' + task.id);
+    this.todoList = this.todoList.filter(
+      (item: { id: any }) => item.id != task.id
+    );
   }
 }
