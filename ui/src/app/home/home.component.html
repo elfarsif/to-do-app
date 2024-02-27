@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <!-- To do app -->
   <div class="row">
     <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 text-center">
       <img
@@ -8,38 +9,42 @@
       />
       <h5>Whoop, its Monday 💪😀</h5>
 
-      <form>
+      <form [formGroup]="todoForm">
         <div class="input-group mb-3">
           <input
             type="text"
             class="form-control"
             placeholder="✍️ Add item .."
             aria-label="Recipient's username"
+            formControlName="todo"
           />
           <div class="input-group-append">
-            <button class="input-group-text">+</button>
+            <button class="input-group-text" (click)="addToDoItem()">+</button>
           </div>
         </div>
       </form>
       <div class="w-100">
         <ul class="list-group">
+          @for(task of todoList;track task.id){
           <li class="list-group-item">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="flexCheckChecked"
-                checked
-              />
-              <label class="form-check-label" for="flexCheckChecked">
-                Study for the CHEM 201 test
+            <div class="row form-check">
+              <label
+                class="col-11 form-check-label"
+                [ngClass]="{ completed: task.isCompleted }"
+                (click)="task.isCompleted = !task.isCompleted"
+              >
+                {{ task.todo }}
               </label>
+              <button class="col-1 btn btn-light" (click)="removeItem(task)">
+                x
+              </button>
             </div>
           </li>
-          <li class="list-group-item">{{ content }}</li>
+
+          }
         </ul>
       </div>
     </div>
   </div>
+  {{ content }}
 </div>
